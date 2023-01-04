@@ -10,6 +10,8 @@ def send_request(url,data):
             'Content-Type': 'application/xml','User-agent': useragent.get_useragent()})
         if 'xml' in req.headers['Content-Type']:
             rsp = req.content.decode('utf-8')
+            if('faultCode' in rsp):
+                return ""
         else:
             rsp = ""
         return rsp
