@@ -1,8 +1,15 @@
 import threading
 import requests
 import useragent
+from urllib.parse import urlparse
 result = []
+def url2domain(url):
+    parsed_url = urlparse(url)
+    domain = parsed_url.netloc
+    return domain
+
 def req(url):
+    url = url2domain(url)
     try:
         try:
             response = requests.get(f"https://{url}/xmlrpc.php", headers={'User-agent': useragent.get_useragent()},timeout=20)
