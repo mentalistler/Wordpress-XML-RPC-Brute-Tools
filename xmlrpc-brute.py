@@ -19,7 +19,9 @@ def send_request(url,data):
         return "0"
 
 def result_analyzer(content):
-    if(content !=""):
+    if(content == "1"):
+        return False
+    elif(content !=""):
         match = re.search(r'<int>(\d+)</int>', content)
         if match:
             return False
