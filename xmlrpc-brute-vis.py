@@ -64,7 +64,7 @@ def conf(url):
                 if(ishacked):
                     txt = f"{url}||{username}||{password}"
                     pbar_combination.set_description_str("{url} Pattern Found!")
-                    print(txt,"Pattern Found!")
+                    #print(txt,"Pattern Found!")
                     #print(content)
                     result.append(txt)
                     return txt
