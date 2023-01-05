@@ -19,9 +19,7 @@ def send_request(url,data):
         return "0"
 
 def result_analyzer(content):
-    if(content == "1"):
-        return False
-    elif(content !=""):
+    if(content !=""):
         match = re.search(r'<int>(\d+)</int>', content)
         if match:
             return False
@@ -54,13 +52,16 @@ def conf(url):
             content =send_request(url,data)
             if(content =="0"):
                 return "0"
-            ishacked = result_analyzer(content)
-            if(ishacked):
-                txt = f"{url}||{username}||{password}"
-                print(txt,"Pattern Found!")
-                #print(content)
-                result.append(txt)
-                return txt
+            elif(content == "1"):
+                pass
+            else:
+                ishacked = result_analyzer(content)
+                if(ishacked):
+                    txt = f"{url}||{username}||{password}"
+                    print(txt,"Pattern Found!")
+                    #print(content)
+                    result.append(txt)
+                    return txt
 
 def write_list_to_file():
     list_to_write = result
