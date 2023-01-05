@@ -11,12 +11,12 @@ def send_request(url,data):
         if 'xml' in req.headers['Content-Type']:
             rsp = req.content.decode('utf-8')
             if('faultCode' in rsp):
-                return ""
+                return "1"
         else:
-            rsp = ""
+            rsp = "0"
         return rsp
     except:
-        return ""
+        return "0"
 
 def result_analyzer(content):
     if(content !=""):
@@ -50,6 +50,8 @@ def conf(url):
                     </methodCall>
             """
             content =send_request(url,data)
+            if(content =="0"):
+                return "0"
             ishacked = result_analyzer(content)
             if(ishacked):
                 txt = f"{url}||{username}||{password}"
