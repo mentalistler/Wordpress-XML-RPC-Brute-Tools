@@ -9,15 +9,17 @@ def url2domain(url):
     return domain
 
 def req(url):
+    if(url.find("http://") == -1):
+        url = "http://"+url
     url = url2domain(url)
     try:
         try:
-            response = requests.get(f"https://{url}/xmlrpc.php", headers={'User-agent': useragent.get_useragent()},timeout=20)
+            response = requests.get(f"https://{url}/xmlrpc.php", headers={'User-agent': useragent.get_useragent()},timeout=10)
             if(response.text.find("XML-RPC server accepts POST requests only.")>-1):
                 print("Potantial xmlrpc vulnerability found!", url)
                 result.append(f"https://{url}/xmlrpc.php")
         except:
-            response = requests.get(f"http://{url}/xmlrpc.php",  headers={'User-agent': useragent.get_useragent()},timeout=20)
+            response = requests.get(f"http://{url}/xmlrpc.php",  headers={'User-agent': useragent.get_useragent()},timeout=10)
             if(response.text.find("XML-RPC server accepts POST requests only.")>-1):
                 print("Potantial xmlrpc vulnerability found!", url)
                 result.append(f"http://{url}/xmlrpc.php")
